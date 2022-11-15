@@ -1,3 +1,5 @@
+import src.interfaces.SensorObserver;
+
 class Controller implements SensorObserver{
 
     SilTest.Sensor sensor;

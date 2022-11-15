@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import src.interfaces.MotorInterface;
+import src.interfaces.SensorInterface;
+import src.interfaces.SensorObserver;
+
 public class SilTest {
 
     static class Sensor implements SensorInterface {
@@ -41,6 +45,7 @@ public class SilTest {
             }
         }
 
+        @Override
         public void populateArray(int newSensorValue) {
 
             valueList.add(newSensorValue);

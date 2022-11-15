@@ -1,3 +1,4 @@
+package src.interfaces;
 public interface MotorInterface {
 
     // changes the steerValue value
