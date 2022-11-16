@@ -1,3 +1,4 @@
+package src.impl;
 import src.interfaces.SensorObserver;
 
 class Controller implements SensorObserver{
