@@ -14,12 +14,20 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import src.impl.Sensor;
 
 public class SimulatorGUI extends JFrame {
 
     JFrame frame;
+    JButton sensorButton;
+    JTextField sensorField1;
+    JTextField sensorField2;
+    JTextField sensorField3;
+    JTextField sensorField4;
+    JTextField motorDField;
+    JTextField motorSField;
     int sensorCount = 0;
 
     public SimulatorGUI() {
@@ -28,6 +36,7 @@ public class SimulatorGUI extends JFrame {
 
         JPanel sensorArea = new JPanel();
         sensorArea.setLayout(new GridLayout(1, 1));
+        sensorArea.setBorder(new EmptyBorder(50, 0, 0, 0));
 
         JPanel sensor1 = new JPanel(new FlowLayout());
         JPanel sensor2 = new JPanel(new FlowLayout());
@@ -39,17 +48,20 @@ public class SimulatorGUI extends JFrame {
         JLabel sensorLabel3 = new JLabel("Sensor 3");
         JLabel sensorLabel4 = new JLabel("Sensor 4");
 
-        JTextField sensorField1 = new JTextField();
+        // Sensor 1
+        sensorField1 = new JTextField();
         sensorField1.setPreferredSize(new Dimension(200, 24));
-        JTextField sensorField2 = new JTextField();
+        // Sensor 2
+        sensorField2 = new JTextField();
         sensorField2.setPreferredSize(new Dimension(200, 24));
-        JTextField sensorField3 = new JTextField();
+        // Sensor 3
+        sensorField3 = new JTextField();
         sensorField3.setPreferredSize(new Dimension(200, 24));
-        JTextField sensorField4 = new JTextField();
+        // Sensor 4
+        sensorField4 = new JTextField();
         sensorField4.setPreferredSize(new Dimension(200, 24));
 
-
-        JButton sensorButton = new JButton("Übernehmen");
+        sensorButton = new JButton("Übernehmen");
 
         sensorButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -90,10 +102,14 @@ public class SimulatorGUI extends JFrame {
         JLabel motorDLabel = new JLabel("Motor zur Fahrt");
         JLabel motorSLabel = new JLabel("Motor zum Lenken");
 
-        JTextField motorDField = new JTextField();
+        // Motor drive
+        motorDField = new JTextField();
         motorDField.setPreferredSize(new Dimension(200, 24));
-        JTextField motorSField = new JTextField();
+        motorDField.setEditable(false);
+        // Motor Steer
+        motorSField = new JTextField();
         motorSField.setPreferredSize(new Dimension(200, 24));
+        motorSField.setEditable(false);
 
         motorDrive.add(motorDLabel);
         motorDrive.add(motorDField);
@@ -118,6 +134,22 @@ public class SimulatorGUI extends JFrame {
 
         Image image = new ImageIcon(this.getClass().getResource("/resources/mac256.png")).getImage();
         frame.setIconImage(image);
+    }
+
+    private void calculateValues(){
+        
+        sensorButton.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int val1 = Integer.parseInt(sensorField1.getText());
+                int val2 = Integer.parseInt(sensorField2.getText());
+                int val3 = Integer.parseInt(sensorField3.getText());
+                int val4 = Integer.parseInt(sensorField4.getText());
+                
+            }
+            
+        });
     }
 
     Sensor createSensor() {
