@@ -7,13 +7,13 @@ import src.interfaces.SensorInterface;
 import src.interfaces.SensorObserver;
 
 public class Sensor implements SensorInterface {
-    int id;
-    int sensorValue;
-    List<SensorObserver> osList = new ArrayList<>();
-    List<Integer> valueList = new ArrayList<>();
-    int tolerance = 5;
+    private int id;
+    private int sensorValue;
+    private List<SensorObserver> osList = new ArrayList<>();
+    private List<Integer> valueList = new ArrayList<>();
+    private int tolerance = 5;
 
-    public Sensor(int id) {
+    public Sensor(int id){
         this.id = id;
     }
 
@@ -92,5 +92,20 @@ public class Sensor implements SensorInterface {
 
         }
 
+    }
+
+    @Override
+    public int getId(){
+        return id;
+    }
+
+    @Override
+    public int getValue(){
+        return sensorValue;
+    }
+
+    @Override
+    public List<Integer> getValueList(){
+        return valueList;
     }
 }

@@ -18,4 +18,13 @@ public interface SensorInterface {
 
     // tolerance in which wrong sensor values are disposed off
     void faultTolerance(List<Integer> valueList);
+
+    // return id
+    int getId();
+
+    // return sensorValue
+    int getValue();
+
+    // retrun valueList
+    List<Integer> getValueList();
 }

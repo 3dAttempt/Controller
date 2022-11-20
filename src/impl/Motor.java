@@ -20,4 +20,14 @@ public class Motor implements MotorInterface {
         this.driveValue = driveValue;
     }
 
+    @Override
+    public int getSteerValue(){
+        return steerValue; 
+    }
+
+    @Override
+    public int getDriveValue(){
+        return driveValue;
+    }
+
 }

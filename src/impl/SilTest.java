@@ -97,6 +97,21 @@ public class SilTest {
 
         }
 
+        @Override
+        public int getId() {
+            return id;
+        }
+
+        @Override
+        public int getValue() {
+            return sensorValue;
+        }
+
+        @Override
+        public List<Integer> getValueList() {
+            return valueList;
+        }
+
     }
 
     static class Motor implements MotorInterface {
@@ -117,6 +132,16 @@ public class SilTest {
         @Override
         public void drive(int driveValue) {
             this.driveValue = driveValue;
+        }
+
+        @Override
+        public int getSteerValue() {
+            return steerValue;
+        }
+
+        @Override
+        public int getDriveValue() {
+            return driveValue;
         }
 
     }
@@ -227,9 +252,9 @@ public class SilTest {
             sensor.populateArray(5);
         }
     }
-
+/*
     static void test1() {
-        Sensor sensor1 = new Sensor(1);
+        Sensor sensor1 = new SilTest.Sensor(1);
         Motor motor1 = new SilTest.Motor(1);
         Controller controller1 = new Controller(sensor1, motor1);
         sensor1.addObserver(controller1);
@@ -264,6 +289,7 @@ public class SilTest {
         assertEquals(motor1.driveValue, 0);
         assertEquals(motor1.steerValue, 0);
     }
+    */
 
     static void assertEquals(int isValue, int shouldValue) {
 
@@ -272,7 +298,7 @@ public class SilTest {
         else
             System.out.println("Test failed! The value is: " + isValue);
     }
-
+/* 
     static void test2() {
         Sensor sensor1 = new Sensor(1);
         Motor motor1 = new SilTest.Motor(1);
@@ -364,6 +390,7 @@ public class SilTest {
         }
 
     }
+    */
 
     //public static void main(String[] args) {
     //    // test1();
