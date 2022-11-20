@@ -1,38 +1,60 @@
 package src.gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import src.impl.Sensor;
+import src.impl.Controller;
+import src.impl.Motor;
 
 public class SimulatorGUI extends JFrame {
 
-    JFrame frame;
-    JButton sensorButton;
-    JTextField sensorField1;
-    JTextField sensorField2;
-    JTextField sensorField3;
-    JTextField sensorField4;
-    JTextField motorDField;
-    JTextField motorSField;
-    int sensorCount = 0;
+    private JFrame frame;
+    private JButton sensorButton;
+    private JCheckBox toleranceToggle;
+    private JTextField sensorField1;
+    private JTextField sensorField2;
+    private JTextField sensorField3;
+    private JTextField sensorField4;
+    private JTextField motorDField;
+    private JTextField motorSField;
+
+    private Sensor s1;
+    private Sensor s2;
+    private Sensor s3;
+    private Sensor s4;
+    private List<Sensor> sList = new ArrayList<>();
+
+    private Motor m1;
+    private Motor m2;
+    private List<Motor> mList = new ArrayList<>();
+
+    private Controller controller;
 
     public SimulatorGUI() {
         frame = new JFrame();
         initializeWindow();
+        createSensor();
+        createMotor();
+        controller = new Controller(sList, mList);
+        s1.addObserver(controller);
+        s2.addObserver(controller);
+        s3.addObserver(controller);
+        s4.addObserver(controller);
 
         JPanel sensorArea = new JPanel();
         sensorArea.setLayout(new GridLayout(1, 1));
@@ -49,26 +71,22 @@ public class SimulatorGUI extends JFrame {
         JLabel sensorLabel4 = new JLabel("Sensor 4");
 
         // Sensor 1
-        sensorField1 = new JTextField();
+        sensorField1 = new JTextField("0");
         sensorField1.setPreferredSize(new Dimension(200, 24));
         // Sensor 2
-        sensorField2 = new JTextField();
+        sensorField2 = new JTextField("0");
         sensorField2.setPreferredSize(new Dimension(200, 24));
         // Sensor 3
-        sensorField3 = new JTextField();
+        sensorField3 = new JTextField("0");
         sensorField3.setPreferredSize(new Dimension(200, 24));
         // Sensor 4
-        sensorField4 = new JTextField();
+        sensorField4 = new JTextField("0");
         sensorField4.setPreferredSize(new Dimension(200, 24));
 
         sensorButton = new JButton("Übernehmen");
+        toleranceToggle = new JCheckBox("Mit Fehlertoleranz");
 
-        sensorButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Sensor 1");
-            }
-        });
-
+        calculateValues();
 
         sensor1.add(sensorLabel1);
         sensor1.add(sensorField1);
@@ -90,7 +108,9 @@ public class SimulatorGUI extends JFrame {
         frame.add(sensorArea);
 
         JPanel buttonArea = new JPanel();
+    
         buttonArea.add(sensorButton);
+        buttonArea.add(toleranceToggle);
 
         frame.add(buttonArea);
 
@@ -99,17 +119,17 @@ public class SimulatorGUI extends JFrame {
         JPanel motorDrive = new JPanel(new FlowLayout());
         JPanel motorSteer = new JPanel(new FlowLayout());
 
-        JLabel motorDLabel = new JLabel("Motor zur Fahrt");
+        JLabel motorDLabel = new JLabel("Motor zum Fahren");
         JLabel motorSLabel = new JLabel("Motor zum Lenken");
 
         // Motor drive
         motorDField = new JTextField();
         motorDField.setPreferredSize(new Dimension(200, 24));
-        motorDField.setEditable(false);
+        //motorDField.setEditable(false);
         // Motor Steer
         motorSField = new JTextField();
         motorSField.setPreferredSize(new Dimension(200, 24));
-        motorSField.setEditable(false);
+        //motorSField.setEditable(false);
 
         motorDrive.add(motorDLabel);
         motorDrive.add(motorDField);
@@ -136,9 +156,9 @@ public class SimulatorGUI extends JFrame {
         frame.setIconImage(image);
     }
 
-    private void calculateValues(){
-        
-        sensorButton.addActionListener(new ActionListener(){
+    private void calculateValues() {
+
+        sensorButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -146,17 +166,60 @@ public class SimulatorGUI extends JFrame {
                 int val2 = Integer.parseInt(sensorField2.getText());
                 int val3 = Integer.parseInt(sensorField3.getText());
                 int val4 = Integer.parseInt(sensorField4.getText());
-                
+
+                if(toleranceToggle.isSelected()){
+                    for(int i = 0; i < (3 - s1.getValueList().size()); i++){
+                        s1.populateArray(val1);
+                    }
+                    for(int i = 0; i < (3 - s2.getValueList().size()); i++){
+                        s2.populateArray(val2);
+                    }
+                    for(int i = 0; i < (3 - s3.getValueList().size()); i++){
+                        s3.populateArray(val3);
+                    }
+                    for(int i = 0; i < (3 - s4.getValueList().size()); i++){
+                        s4.populateArray(val4);
+                    }
+
+                    s1.populateArray(val1);
+                    s2.populateArray(val2);
+                    s3.populateArray(val3);
+                    s4.populateArray(val4);
+
+                }
+                if(!(toleranceToggle.isSelected())){
+                    s1.changeValue(val1);
+                    s2.changeValue(val2);
+                    s3.changeValue(val3);
+                    s4.changeValue(val4);
+                }
+
+                motorDField.setText("" + m1.getDriveValue());
+                motorSField.setText("" + m2.getSteerValue());
+
             }
-            
+
         });
     }
 
-    Sensor createSensor() {
-        Sensor s = new Sensor(sensorCount);
-        sensorCount += 1;
+    private void createSensor() {
+        s1 = new Sensor(0);
+        s2 = new Sensor(1);
+        s3 = new Sensor(2);
+        s4 = new Sensor(3);
 
-        return s;
+        sList.add(s1);
+        sList.add(s2);
+        sList.add(s3);
+        sList.add(s4);
+    }
+
+    private void createMotor(){
+        m1 = new Motor(0);
+        m2 = new Motor(1);
+
+        mList.add(m1);
+        mList.add(m2);
     }
 
 }
