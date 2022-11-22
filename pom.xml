@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<project name="EV3/NXT Robot" default="info">
+    <target name = "Main.class" depends = "Main.java">
+        <exec executable = "javac">
+            <arg line = "-d /out/ Main.java" />
+        </exec>
+    </target>
+</project>
