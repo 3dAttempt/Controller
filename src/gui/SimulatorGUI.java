@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -53,6 +52,13 @@ public class SimulatorGUI extends JFrame{
         createSensor();
         createMotor();
 
+        if(!b){
+            controller = new Controller(sList, mList);
+            s1.addObserver(controller);
+            s2.addObserver(controller);
+            s3.addObserver(controller);
+            s4.addObserver(controller);
+        }
 
         JPanel sensorArea = new JPanel();
         sensorArea.setLayout(new GridLayout(1, 1));

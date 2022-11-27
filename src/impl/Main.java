@@ -10,7 +10,7 @@ import src.interfaces.SensorInterface;
 
 public class Main {
     public static void main(String[] args) {
-        if (args[0].equals("SilTest") && args[1].equals("SilTest")) {
+        if (args[0].equals("SilTest") && args[1].equals("SilTest")) {   // Input values at least 3 times so the array gets filled.
             SensorInterface s = new SilTest.Sensor(0);
             MotorInterface m = new SilTest.Motor(0);
 
@@ -48,7 +48,7 @@ public class Main {
             }
 
         }
-        if (args[0].equals("SilTest") && args[1].equals("GUI")) {
+        if (args[0].equals("SilTest") && args[1].equals("GUI")) {   // Insert values at least 3 times <sensor1> <sensor2> <sensor3> <sensor4>
             SensorInterface s1 = new SilTest.Sensor(0);
             SensorInterface s2 = new SilTest.Sensor(1);
             SensorInterface s3 = new SilTest.Sensor(2);
