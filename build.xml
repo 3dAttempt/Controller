@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<project name="EV3/NXT Robot" default="run">
+    
+    <target name = "GUI-GUI" depends = "Main.class">
+        <java classname="src.impl.Main" fork="true">
+            <classpath path="out"/>
+            <arg value="GUI"/>
+            <arg value="GUI"/>
+        </java>
+    </target>
+
+    <target name = "SilTest-SilTest" depends = "Main.class">
+        <java classname="src.impl.Main" fork="true">
+            <classpath path="out"/>
+            <arg value="SilTest"/>
+            <arg value="SilTest"/>
+        </java>
+    </target>
+
+    <target name = "SilTest-GUI" depends = "Main.class">
+        <java classname="src.impl.Main" fork="true">
+            <classpath path="out"/>
+            <arg value="SilTest"/>
+            <arg value="GUI"/>
+        </java>
+    </target>
+
+    <target name = "GUI-SilTest" depends = "Main.class">
+        <java classname="src.impl.Main" fork="true">
+            <classpath path="out"/>
+            <arg value="GUI"/>
+            <arg value="SilTest"/>
+        </java>
+    </target>
+
+    <target name = "Main.class">
+        <javac includeantruntime="false" srcdir="./src" destdir="out"/>
+    </target>
+
+</project>
