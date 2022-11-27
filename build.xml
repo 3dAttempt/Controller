@@ -33,8 +33,16 @@
         </java>
     </target>
 
-    <target name = "Main.class">
+    <target name = "Main.class" depends = "create-out">
         <javac includeantruntime="false" srcdir="./src" destdir="out"/>
+    </target>
+
+    <target name = "delete-out">
+        <delete dir = "out"/>
+    </target>
+
+    <target name = "create-out" depends = "delete-out">
+        <mkdir dir = "out"/>
     </target>
 
 </project>
