@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Program Files\\leJOS EV3\\lib\\ev3\\ev3classes.jar",
+        "c:\\Program Files (x86)\\leJOS NXJ\\lib\\nxt\\classes.jar"
+    ]
+}

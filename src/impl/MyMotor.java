@@ -1,12 +1,12 @@
 package src.impl;
 import src.interfaces.MotorInterface;
 
-public class Motor implements MotorInterface {
+public class MyMotor implements MotorInterface {
     int id;
     int steerValue;
     int driveValue;
 
-    public Motor(int id) {
+    public MyMotor(int id) {
         this.id = id;
     }
 

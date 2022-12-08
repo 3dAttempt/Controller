@@ -1,5 +1,17 @@
 <?xml version="1.0"?>
 <project name="EV3/NXT Robot" default="run">
+
+    <target name = "NXT-NXT" depends = "change-to-out">
+        <exec executable="cmd">
+            <arg line="nxjupload -v -o ..\Test.nxj src.ev3.EV3Main"/>
+        </exec>
+    </target>
+
+    <target name = "change-to-out">
+        <exec executable="cmd">
+            <arg line="cd .\out\"/>
+        </exec>
+    </target>
     
     <target name = "GUI-GUI" depends = "Main.class">
         <java classname="src.impl.Main" fork="true">

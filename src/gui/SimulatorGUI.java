@@ -18,7 +18,7 @@ import javax.swing.border.EmptyBorder;
 
 import src.impl.Sensor;
 import src.impl.Controller;
-import src.impl.Motor;
+import src.impl.MyMotor;
 import src.interfaces.*;
 
 public class SimulatorGUI extends JFrame{
@@ -227,8 +227,8 @@ public class SimulatorGUI extends JFrame{
     }
 
     private void createMotor(){
-        m1 = new Motor(0);
-        m2 = new Motor(1);
+        m1 = new MyMotor(0);
+        m2 = new MyMotor(1);
 
         mList.add(m1);
         mList.add(m2);
