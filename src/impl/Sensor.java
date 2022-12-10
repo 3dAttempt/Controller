@@ -13,8 +13,13 @@ public class Sensor implements SensorInterface {
     private List<Integer> valueList = new ArrayList<>();
     private int tolerance = 5;
 
+
     public Sensor(int id){
         this.id = id;
+
+        valueList.add(40);  // without these the sensors start with 0 distance which causes the robot to immediately turn
+        valueList.add(40);
+        valueList.add(40);
     }
 
     @Override

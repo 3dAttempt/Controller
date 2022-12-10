@@ -11,8 +11,8 @@ public class NXTMotor extends MyMotor{
     NXTRegulatedMotor driveMotor2;
     NXTRegulatedMotor steerMotor;
 
-    int steerValue;
-    int driveValue;
+    int steerValue = 0;
+    int driveValue = 0;
 
     public NXTMotor(int id, String type) {
         super(id);
@@ -31,15 +31,20 @@ public class NXTMotor extends MyMotor{
 
         steerMotor.setSpeed(steerValue);
         steerMotor.forward();
+
     }
 
     public void drive(int driveValue) {
         this.driveValue = driveValue;
 
-        driveMotor1.setSpeed(driveValue);
-        driveMotor2.setSpeed(driveValue);
-        driveMotor1.backward();             // motors are installed backwards, thus they drive forwards when backward() method is used
+        setDriveSpeed(driveValue);
+        driveMotor1.backward();             // motors are installed backwards, thus the robot drives forwards when backward() method is used
         driveMotor2.backward();
+    }
+
+    public void setDriveSpeed(int speed) {
+        driveMotor1.setSpeed(speed);
+        driveMotor2.setSpeed(speed);
     }
     
 

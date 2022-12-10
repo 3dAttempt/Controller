@@ -96,10 +96,10 @@ public class Controller implements SensorObserver {
 
         if (valCalc <= 5 && !(valCalc < 0)) {
             motorList.get(0).drive(0);
-            motorList.get(1).steer(valCalc);
+            motorList.get(1).steer(200);
         }
         if (valCalc > 5) {
-            motorList.get(0).drive(valCalc);
+            motorList.get(0).drive(200);
             motorList.get(1).steer(0);
         }
         if (valCalc < 0) {

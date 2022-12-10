@@ -1,17 +1,117 @@
 <?xml version="1.0"?>
 <project name="EV3/NXT Robot" default="run">
 
-    <target name = "NXT-NXT" depends = "change-to-out">
-        <exec executable="cmd">
-            <arg line="nxjupload -v -o ..\Test.nxj src.ev3.EV3Main"/>
+    <target name = "NXT-NXT" depends="nxt-link">
+        <exec executable="cmd" dir=".">
+            <arg value ="/C" />
+            <arg value="nxjupload -u -r NXTMain.nxj"/>
         </exec>
     </target>
 
-    <target name = "change-to-out">
-        <exec executable="cmd">
-            <arg line="cd .\out\"/>
+    <target name = "nxt-link" depends = "nxt-compile">
+        <exec executable="cmd" dir="./out">
+            <arg value ="/C"/>
+            <arg value="nxjlink -v -o ..\NXTMain.nxj src.nxt.NXTMain"/>
         </exec>
     </target>
+
+    <target name = "nxt-compile" depends = "create-out">
+        <exec executable="cmd" dir="./src">
+            <arg value="/C"/>
+            <arg value="nxjc -bootclasspath &quot;.\nxt\NXTMain.java;C:\Program Files (x86)\leJOS NXJ\lib\nxt\classes.jar&quot; -d ..\out -sourcepath . impl\Controller.java impl\MyMotor.java impl\Sensor.java impl\SilTest.java interfaces\* nxt\NXTMain.java nxt\NXTMotor.java nxt\NXTSensor.java"/>
+        </exec>
+    </target>
+
+    <target name ="SilTest-NXT" depends = "silnxt-link">
+        <exec executable="cmd" dir=".">
+            <arg value ="/C" />
+            <arg value="nxjupload -u -r SilNXTMain.nxj"/>
+        </exec>
+    </target>
+
+    <target name = "silnxt-link" depends = "silnxt-compile">
+        <exec executable="cmd" dir="./out">
+            <arg value ="/C"/>
+            <arg value="nxjlink -v -o ..\SilNXTMain.nxj src.nxt.SilNXTMain"/>
+        </exec>
+    </target>
+
+    <target name = "silnxt-compile" depends = "create-out">
+        <exec executable="cmd" dir="./src">
+            <arg value="/C"/>
+            <arg value="nxjc -bootclasspath &quot;.\nxt\SilNXTMain.java;C:\Program Files (x86)\leJOS NXJ\lib\nxt\classes.jar&quot; -d ..\out -sourcepath . impl\Controller.java impl\MyMotor.java impl\Sensor.java impl\SilTest.java interfaces\* nxt\SilNXTMain.java nxt\NXTMotor.java nxt\NXTSensor.java"/>
+        </exec>
+    </target>
+
+    <target name = "NXT-EV3" depends="ev3-jar">
+         <exec executable="cmd" dir=".">
+            <arg value="/C"/>
+            <arg value="scp -i .\id_rsa -o KexAlgorithms=diffie-hellman-group1-sha1 -o Ciphers=aes256-cbc EV3Main.jar root@10.0.1.1:/home/lejos/programs/"/>
+         </exec>
+    </target>
+
+    <target name="ev3-jar" depends="ev3-compile,delete-jar">
+        <jar destfile="EV3Main.jar" basedir="./out">
+            <manifest>
+                <attribute name="Main-Class" value="src.ev3.EV3Main"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+        </jar>  
+    </target>
+
+    <target name="ev3-compile" depends="create-out">
+		<javac
+			srcdir="./src"
+			destdir="./out"
+			includeAntRuntime="false"
+			includeJavaRuntime="false"
+			verbose="false"
+		>
+            <include name="impl/*"/>
+            <include name="ev3/*"/>
+            <include name="interfaces/*"/>
+            <exclude name="ev3/SilEV3Main.java"/>
+            <exclude name="impl/Main.java"/>
+            <exclude name="gui/*"/>
+            <exclude name="nxt/*"/>
+			<classpath refid="libraries.path" />
+		</javac>
+	</target>
+
+    <target name = "SilTest-EV3" depends="silev3-jar">
+         <exec executable="cmd" dir=".">
+            <arg value="/C"/>
+            <arg value="scp -i .\id_rsa -o KexAlgorithms=diffie-hellman-group1-sha1 -o Ciphers=aes256-cbc SilEV3Main.jar root@10.0.1.1:/home/lejos/programs/"/>
+         </exec>
+    </target>
+
+    <target name="silev3-jar" depends="silev3-compile,delete-jar">
+        <jar destfile="SilEV3Main.jar" basedir="./out">
+            <manifest>
+                <attribute name="Main-Class" value="src.ev3.SilEV3Main"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+        </jar>  
+    </target>
+
+    <target name="silev3-compile" depends="create-out">
+		<javac
+			srcdir="./src"
+			destdir="./out"
+			includeAntRuntime="false"
+			includeJavaRuntime="false"
+			verbose="false"
+		>
+            <include name="impl/*"/>
+            <include name="ev3/*"/>
+            <include name="interfaces/*"/>
+            <exclude name="ev3/EV3Main.java"/>
+            <exclude name="impl/Main.java"/>
+            <exclude name="gui/*"/>
+            <exclude name="nxt/*"/>
+			<classpath refid="libraries.path" />
+		</javac>
+	</target>
     
     <target name = "GUI-GUI" depends = "Main.class">
         <java classname="src.impl.Main" fork="true">
@@ -46,7 +146,10 @@
     </target>
 
     <target name = "Main.class" depends = "create-out">
-        <javac includeantruntime="false" srcdir="./src" destdir="out"/>
+        <javac includeantruntime="false" srcdir="./src" destdir="out">
+            <exclude name="ev3/*"/>
+            <exclude name="nxt/*"/>
+        </javac>
     </target>
 
     <target name = "delete-out">
@@ -56,5 +159,18 @@
     <target name = "create-out" depends = "delete-out">
         <mkdir dir = "out"/>
     </target>
+
+    <target name="delete-jar">
+        <delete file="EV3Main.jar"/>
+        <delete file="SilEV3Main.jar"/>
+    </target>
+
+    <path id="libraries.path">    
+        <fileset dir="C:\Program Files\leJOS EV3\lib\ev3\">
+            <include name="ev3classes.jar"/>
+        </fileset>
+    </path>
+
+
 
 </project>

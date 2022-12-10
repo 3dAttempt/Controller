@@ -1,4 +1,4 @@
-package src.ev3;
+package src.nxt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,13 +8,12 @@ import src.impl.SilTest;
 import src.interfaces.MotorInterface;
 import src.interfaces.SensorInterface;
 
-public class EV3Main {
-        
+public class SilNXTMain {
     public static void main(String[] args) {
-        EV3Sensor s1 = new EV3Sensor(0, "S1");
-        EV3Sensor s2 = new EV3Sensor(1, "S2");
-        EV3Sensor s3 = new EV3Sensor(2, "S3");
-        EV3Sensor s4 = new EV3Sensor(3, "S4");
+        SilTest.Sensor s1 = new SilTest.Sensor(0);
+        SilTest.Sensor s2 = new SilTest.Sensor(1);
+        SilTest.Sensor s3 = new SilTest.Sensor(2);
+        SilTest.Sensor s4 = new SilTest.Sensor(3);
 
         List<SensorInterface> sList = new ArrayList<>();
         sList.add(s1);
@@ -22,8 +21,8 @@ public class EV3Main {
         sList.add(s3);
         sList.add(s4);
 
-        EV3Motor dm = new EV3Motor(0, "drive");
-        EV3Motor sm = new EV3Motor(1, "steer");
+        NXTMotor dm = new NXTMotor(0, "drive");
+        NXTMotor sm = new NXTMotor(1, "steer");
 
         List<MotorInterface> mList = new ArrayList<>();
         mList.add(dm);
@@ -35,10 +34,10 @@ public class EV3Main {
         s3.addObserver(c);
         s4.addObserver(c);
 
-        s1.sThread();
-        s2.sThread();
-        s3.sThread();
-        s4.sThread();
+        s1.frontSensorThread();
+        s2.frontSensorThread();
+        s3.rearSensorThread();
+        s4.rearSensorThread();
 
     }
 }

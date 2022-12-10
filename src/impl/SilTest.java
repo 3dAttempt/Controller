@@ -8,7 +8,7 @@ import src.interfaces.SensorObserver;
 
 public class SilTest {
 
-    static class Sensor implements SensorInterface {
+    public static class Sensor implements SensorInterface {
 
         int id;
         int sensorValue;
@@ -110,6 +110,106 @@ public class SilTest {
         @Override
         public List<Integer> getValueList() {
             return valueList;
+        }
+
+        public Thread frontSensorThread() {
+            Thread t = new Thread() {
+                public void run() {
+                    int distance = 30;
+                    populateArray(distance);
+                    populateArray(distance);
+                    populateArray(distance);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    populateArray(distance-5);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    populateArray(distance-10);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    populateArray(distance-15);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    populateArray(distance-20);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    populateArray(distance-25);
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    populateArray(distance-24);
+                }
+    
+            };
+            t.start();
+            return t;
+        }
+
+        public Thread rearSensorThread() {
+            Thread t = new Thread() {
+                public void run() {
+                    int distance = 80;
+                    populateArray(distance);
+                    populateArray(distance);
+                    populateArray(distance);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    populateArray(distance);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    populateArray(distance);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    populateArray(distance);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    populateArray(distance);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    populateArray(distance);
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    populateArray(distance);
+                }
+            };
+    
+            t.start();
+            return t;
         }
 
     }
@@ -391,10 +491,5 @@ public class SilTest {
 
     }
     */
-
-    //public static void main(String[] args) {
-    //    // test1();
-    //    test2();
-    //}
 
 }

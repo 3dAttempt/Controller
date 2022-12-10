@@ -4,6 +4,7 @@ import src.impl.Sensor;
 
 import lejos.hardware.sensor.NXTUltrasonicSensor;
 import lejos.robotics.SampleProvider;
+import lejos.hardware.lcd.LCD;
 import lejos.hardware.port.SensorPort;
 
 public class EV3Sensor extends Sensor{
@@ -32,7 +33,7 @@ public class EV3Sensor extends Sensor{
                 while(isRunning){
                     scanDistance();
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -48,6 +49,7 @@ public class EV3Sensor extends Sensor{
         distance.fetchSample(sample, 0);
         newSensorValue = (int) Math.round(sample[0]);
 
-        super.populateArray(newSensorValue);
+        LCD.drawString(String.valueOf(newSensorValue), 0, 0);
+        //super.populateArray(newSensorValue);
     }
 }

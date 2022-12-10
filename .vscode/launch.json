@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch EV3Main",
+            "request": "launch",
+            "mainClass": "src.ev3.EV3Main",
+            "projectName": "Controller_6e091544"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "src.impl.Main",
+            "projectName": "Controller_6e091544"
+        },
+        {
+            "type": "java",
+            "name": "Launch NXTMain",
+            "request": "launch",
+            "mainClass": "src.nxt.NXTMain",
+            "projectName": "Controller_6e091544"
+        },
+        {
+            "type": "java",
+            "name": "Launch SilNXTMain",
+            "request": "launch",
+            "mainClass": "src.nxt.SilNXTMain",
+            "projectName": "Controller_6e091544"
+        }
+    ]
+}
