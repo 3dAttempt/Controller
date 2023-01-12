@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-01-12T11:01:44.889Z" agent="5.0 (Windows)" etag="Cs2toJgZtr4RTwXV6JV-" version="20.8.3" type="github">
+<mxfile host="app.diagrams.net" modified="2023-01-12T13:23:35.274Z" agent="5.0 (Windows)" etag="_ytlg2JnbrVRt66AuEro" version="20.8.4" type="github">
   <diagram id="Hm4vZ4X6HkvJv1kam_Tk" name="Page-1">
-    <mxGraphModel dx="636" dy="321" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1050" dy="530" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -172,19 +172,17 @@
             <mxPoint y="-13" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="hHfARt0xTF7wVSTU7wBD-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=9;" parent="1" source="hHfARt0xTF7wVSTU7wBD-15" target="hHfARt0xTF7wVSTU7wBD-16" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="hHfARt0xTF7wVSTU7wBD-19" value="Stop program" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;" parent="hHfARt0xTF7wVSTU7wBD-18" vertex="1" connectable="0">
-          <mxGeometry x="-0.37" y="1" relative="1" as="geometry">
-            <mxPoint x="-1" as="offset" />
+        <mxCell id="hHfARt0xTF7wVSTU7wBD-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;fontSize=9;" parent="1" source="hHfARt0xTF7wVSTU7wBD-15" target="5z7hVho_otHzit8Zdy6Q-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="370" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="560" y="310" />
+              <mxPoint x="560" y="190" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="hHfARt0xTF7wVSTU7wBD-15" value="Engines stopped" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;" parent="1" vertex="1">
           <mxGeometry x="480" y="300" width="40" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="hHfARt0xTF7wVSTU7wBD-16" value="" style="ellipse;html=1;shape=endState;fillColor=strokeColor;rounded=1;fontSize=9;" parent="1" vertex="1">
-          <mxGeometry x="490" y="370" width="20" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
